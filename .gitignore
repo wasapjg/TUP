@@ -1,0 +1,96 @@
+# Configuración de ambiente local
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Archivos de construcción
+[Bb]in/
+[Oo]bj/
+*.dll
+*.exe
+*.app
+*.ipa
+*.dmg
+*.pkg
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+*.msi
+*.msp
+*.mst
+*.nupkg
+*.psd1
+*.psm1
+
+# Configuración de depuración local
+.vs/
+.launchSettings.json
+
+# Archivos de paquete de NuGet
+*.nupkg
+*.snupkg
+.project.lock.json
+.nuget/packages/
+.nuget/NuGet.Config
+globalPackagesFolder/
+packages/
+*.nuget.props
+*.nuget.targets
+
+# Archivos de publicación/implementación
+.publish/
+out/
+
+# Archivos generados por IDE
+*.log
+*.tlog
+*.cache
+*.csproj.user
+*.csproj.vspscc
+*.csproj.nuget.dgspec.json
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+
+# Archivos de paquetes o dependencias
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+pnpm-lock.yaml
+
+# Archivos de sistema
+*.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Archivos de configuración de contenedores (Docker)
+docker-compose.yml
+docker-compose.override.yml
+.dockerignore
+
+# Archivos de entornos de desarrollo virtualizados
+*.vagrant
+.vagrant/
+*.virtualbox
+.virtualbox/
+*.vbox
+*.vbox-prev
+*.vbox-*
+
+# Configuraciones específicas de sistema operativo
+*.swp
+*.swo
+*.DS_Store
+._*
+
+# Ignorar archivos de configuración sensibles en la carpeta resources
+resources/*.json
+resources/*.xml
+resources/*.config
+resources/*.settings
+resources/*.resx
