@@ -14,11 +14,11 @@ namespace Actividad_Repository.Utils
     public class DataHelper
     {
         private static DataHelper? instance;
-        private string StrCnn;
+        private SqlConnection _connection;
 
         private DataHelper()
         {
-            StrCnn = Resources.StrCnn;
+            _connection = new SqlConnection(Properties.Resources.StrCnn);
         }
 
         public static DataHelper GetInstance()
@@ -32,15 +32,14 @@ namespace Actividad_Repository.Utils
 
         public DataTable ExecuteSPQuery(string sp)
         {
-            DataTable dt = new DataTable();
-            var cnn = new SqlConnection(StrCnn);     //USING: crea el objeto de conexión y lo instancia llamando al constructor
+            DataTable dt = new DataTable();  //USING: crea el objeto de conexión y lo instancia llamando al constructor
             try                                                       //Va dentro de un bloque try/catch, para salvar cualquier error en ejecución que pueda suceder: Exceptions
             {
 
                 {
-                    cnn.Open();
+                    _connection.Open();
 
-                    var cmd = new SqlCommand(sp, cnn);
+                    var cmd = new SqlCommand(sp, _connection);
                     cmd.CommandType = CommandType.StoredProcedure;        //Tengo que dejar indicado que lo que le voy a pasar es un SP y no una query
                     dt.Load(cmd.ExecuteReader());
 
@@ -54,19 +53,18 @@ namespace Actividad_Repository.Utils
             }
             finally
             {
-                cnn.Close();
+                _connection.Close();
             }
         }
 
         public DataTable ExecuteSPQuery(string sp, List<Parametros> p)
         {
             DataTable dt = new DataTable();
-            var cnn = new SqlConnection(StrCnn);     
             try                                                       
             {
                 {
-                    cnn.Open();
-                    var cmd = new SqlCommand(sp, cnn);
+                    _connection.Open();
+                    var cmd = new SqlCommand(sp, _connection);
                     cmd.CommandType = CommandType.StoredProcedure;        
                     foreach (var item in  p)
                     {
@@ -82,8 +80,13 @@ namespace Actividad_Repository.Utils
             }
             finally
             {
-                cnn.Close();
+                _connection.Close();
             }
+        }
+
+        public SqlConnection GetConnection()
+        {
+            return _connection;
         }
     }
 }

@@ -11,5 +11,7 @@ namespace Actividad_Repository.DATA
     {
         List<TipoCuenta> GetAll();
         TipoCuenta GetByID();
+        int Delete(int id);
+        int Save(TipoCuenta tipoCuenta);
     }
 }
