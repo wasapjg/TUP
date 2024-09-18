@@ -10,7 +10,7 @@ namespace Practica01.Datos
     public interface IArticulosRepository
     {
         void Add(Articulos articulo);
-        void Delete(Articulos articulo);
+        void Delete(int id);
         Articulos GetById(int id);
         IEnumerable<Articulos> GetAll();
     }

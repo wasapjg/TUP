@@ -65,7 +65,7 @@ namespace Practica01.Utils
                     cmd.CommandType = CommandType.StoredProcedure;
                     foreach (var item in p)
                     {
-                        cmd.Parameters.Add(item);
+                        cmd.Parameters.Add(new SqlParameter(item.Nombre,item.Valor));
                     }
                     dt.Load(cmd.ExecuteReader());
                 }

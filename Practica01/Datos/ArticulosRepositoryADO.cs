@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Practica01.Datos
 {
@@ -13,12 +14,19 @@ namespace Practica01.Datos
     {
         public void Add(Articulos articulo)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(articulo.PrecioUnitario);
+            List<Parametros> parametros = new List<Parametros>();
+            parametros.Add(new Parametros("@nombre", articulo.Nombre));
+            parametros.Add(new Parametros("@precioUnitario", articulo.PrecioUnitario));
+
+            DataTable dt = DataHelper.GetInstance().ExecuteSPQuery("sp_InsertArticulo", parametros);
         }
 
-        public void Delete(Articulos articulo)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            List<Parametros> parametros = new List<Parametros>();
+            parametros.Add(new Parametros("@id", id));
+            DataTable dt = DataHelper.GetInstance().ExecuteSPQuery("sp_DeleteArticulo");
         }
 
         public IEnumerable<Articulos> GetAll()
@@ -42,7 +50,24 @@ namespace Practica01.Datos
 
         public Articulos GetById(int id)
         {
-            throw new NotImplementedException();
+            List<Parametros> list = new List<Parametros>();
+            list.Add(new Parametros("id", id));
+            Articulos articulos = new Articulos();
+
+            DataTable dt = DataHelper.GetInstance().ExecuteSPQuery("sp_GetArticuloById", list);
+
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                Articulos articulo = new Articulos
+                {
+                    IdArticulo = Convert.ToInt32(dr["IdArticulo"]),
+                    Nombre = dr["Nombre"].ToString(),
+                    PrecioUnitario = Convert.ToDecimal(dr["PrecioUnitario"])
+                };
+            }
+
+            return articulos;
         }
     }
 }
